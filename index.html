@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+    
+    <style>
+
+    .hole {
+    background: tomato;
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    border-radius: 50%;
+    vertical-align: top;
+    text-align: center;
+    font-size: 80px;
+
+
+}
+.grid   {
+    width: 330px;
+    background: lime;
+
+}
+img{
+    width: 80%;
+}
+.timer {
+    float: right;
+    
+}
+.score {
+    float: left;
+
+}
+
+</style>
+
+
+</head>
+<body>
+    <h1>Guacamole</h1>
+    <div class="timer">10</div>
+    <div class="score">Score</div>
+    <div class="timeLeft">Time Left</div>
+    <button class="reset">Reset</button>
+
+
+    <div class="grid">
+        <div class="hole"></div>
+        <div class="hole"></div>
+        <div class="hole"></div>
+        <div class="hole"></div>
+        <div class="hole"></div>
+        <div class="hole"></div>        
+        <div class="hole"><img src='mole.png' alt=""></div>
+        <div class="hole"></div>
+        <div class="hole"></div>
+    </div>
+    <script>
+        var holes = document.querySelectorAll('.hole')
+        var theMoleIMG = '<img src="mole.png" alt="">'
+        var score = 0
+         function randomInt (n) {
+                return Math.floor(Math.random()*n)
+            }
+        
+        function checkMole ()   {
+            if(this.innerHTML === '') {
+                console.log('mole is not here')
+               return score = score - 15
+            } else {
+                console.log('mole IS here')
+                this.innerHTML=''
+                holes[ randomInt(9) ].innerHTML = theMoleIMG
+               return score = score + 10
+                //remove the mole
+            } 
+        }   
+        // function holeSelector () {
+        //     var randomHole = randomInt(holes.length)
+        //     var chosenHole = holes[randomNum]
+        //     this.innerHTML =
+
+        
+          
+        
+        holes[0].addEventListener('click', checkMole)
+        holes[1].addEventListener('click', checkMole)
+        holes[2].addEventListener('click', checkMole)
+        holes[3].addEventListener('click', checkMole)
+        holes[4].addEventListener('click', checkMole)
+        holes[5].addEventListener('click', checkMole)
+        holes[6].addEventListener('click', checkMole)
+        holes[7].addEventListener('click', checkMole)
+        holes[8].addEventListener('click', checkMole)
+        var resetInt
+        var counter = 10
+            var timer = document.querySelector('.timer')
+            function fn(){
+                if (counter === 0){
+                    clearInterval( theIntervalId)
+                    clearInterval(resetInt)
+                    timer.innerHTML = counter
+                } else {
+                    counter = counter - 1
+                    timer.innerHTML = counter
+                }
+            }
+            
+            var theIntervalId = setInterval(fn, 1000)
+            var reset = document.querySelector('.reset')
+            function resetGame() {
+                if (counter===0) {
+                resetInt = setInterval(fn, 1000)
+                timer.innerHTML = 10;
+                counter = 10;
+
+                score.innerHTML = 0; }
+            } 
+            reset.addEventListener('click', resetGame)
+
+    </script>
+</body>
+</html>
